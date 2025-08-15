@@ -1,0 +1,54 @@
+-- answers.sql
+-- Advanced SQL Queries & Aggregations Assignment
+-- Author: Kelvin Ndungu
+-- Date: 2025-08-15
+
+/* 
+ Question 1:
+ Show the total payment amount for each payment date.
+ Sort results by payment date (latest first) and show only the top 5 dates.
+*/
+SELECT 
+    paymentDate,
+    SUM(amount) AS total_amount
+FROM payments
+GROUP BY paymentDate
+ORDER BY paymentDate DESC
+LIMIT 5;
+
+
+/*
+ Question 2:
+ Find the average credit limit of each customer, grouped by customer name and country.
+*/
+SELECT 
+    customerName,
+    country,
+    AVG(creditLimit) AS average_credit_limit
+FROM customers
+GROUP BY customerName, country;
+
+
+/*
+ Question 3:
+ Calculate the total price of products ordered.
+ Formula: quantityOrdered * priceEach
+ Group by product code and quantity ordered.
+*/
+SELECT 
+    productCode,
+    quantityOrdered,
+    SUM(quantityOrdered * priceEach) AS total_price
+FROM orderdetails
+GROUP BY productCode, quantityOrdered;
+
+
+/*
+ Question 4:
+ Find the highest payment amount for each check number.
+*/
+SELECT 
+    checkNumber,
+    MAX(amount) AS highest_amount
+FROM payments
+GROUP BY checkNumber;
